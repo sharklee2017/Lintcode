@@ -1,0 +1,80 @@
+package com.huawei.pailie;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AllPaiLie {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int[] nums = { 1, 2, 3 };
+		System.out.println(permute(nums));
+
+	}
+
+	public static List<List<Integer>> permute(int[] nums) {
+		List<List<Integer>> ret = new ArrayList<List<Integer>>();
+		ArrayList<Integer> temp = new ArrayList<Integer>();
+		// 方法1会用到int[] visited = new int[nums.length];
+		// 方法1参数：(层数k,总层数n，ret，temp，数组候选解，访问标志）
+		// recursion(0, nums.length, ret, temp, nums, visited);
+		// 方法2
+		subsetshelper(ret, temp, nums);
+
+		return ret;
+
+	}
+
+	public static void subsetshelper(List<List<Integer>> ret,
+			ArrayList<Integer> temp, int[] nums) {
+		if (temp.size() == nums.length) {
+			// ArrayList<Integer> temp1 = new ArrayList<Integer>(temp);
+			// 错误写法ret.add((temp));，为什么不能直接传递呢，因为此时你直接传递temp，确实会把temp添加进来，
+			// 但是你后续的删除操作也会改变temp的值，因为传递进来的相当于指针，一直对temp操作，ret里面的指向的内容也会改变
+			ret.add(new ArrayList<Integer>(temp));// 这样我相当于每次new了一个对象，开辟了新空间存储temp
+
+		}
+
+		// 把[1]开头的，[2]开头的,[3]开头的，分别加入到result
+		for (int i = 0; i < nums.length; i++) {
+
+			if (temp.contains(nums[i])) {
+				continue;
+			}
+			// 把1加入到[]，变成了[1]
+			temp.add(nums[i]);
+
+			subsetshelper(ret, temp, nums);
+			// 试玩[1]开头的。要开始试[2]开头的，就要把[1]取出来
+			temp.remove(temp.size() - 1);
+		}
+	}
+
+	public static void recursion(int k, int n, List<List<Integer>> ret,
+			List<Integer> temp, int[] nums, int[] visited) {
+		// 如果temp有n个元素，ret中没有
+		if (k == n && !ret.contains(temp))
+			ret.add(new ArrayList<Integer>(temp));// ret就添加
+
+		if (k > n)// 退出条件限制递归层数
+			return;
+
+		else {
+			for (int i = 0; i < n; i++) {
+				int candidate = nums[i];// 取出一个候选解
+				if (visited[i] == 0)// 如果没有被访问过
+				{
+					temp.add(candidate);// temp添加
+					visited[i] = 1;// 标记访问
+					recursion(k + 1, n, ret, temp, nums, visited);// 递归
+					visited[i] = 0;// 撤销访问标记
+					temp.remove(temp.size() - 1);// 撤销上次添加
+				}
+			}
+		}
+	}
+
+}
