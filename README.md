@@ -1,2 +1,1 @@
-# subset1
-lintcode子集
+# lintcode习题集
