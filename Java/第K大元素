@@ -12,3 +12,43 @@ class Solution {
         return nums[nums.length-k];
     }
 };
+方法2：利用快排思想，选取基准，排序一遍以后，利用基准所在位置下标和所求K-1比较，如果相等，该数即为要找的数，如果大于或者小于，继续递归调用即可。
+class Solution {
+    /*
+     * @param k : description of k
+     * @param nums : array of nums
+     * @return: description of return
+     */
+    public int kthLargestElement(int k, int[] nums) {
+        // write your code here
+      //  Arrays.sort(nums);
+       // return nums[nums.length-k];
+       return quickSort(nums,0,nums.length-1,k);
+        
+    }
+    public int quickSort(int[] nums,int left,int right,int k){
+        int i = left;
+        int j = right;
+        int tmp = nums[i];
+        while(i<j){
+            while(i<j && tmp>=nums[j]) j--;
+            if(i<j){
+                nums[i]=nums[j];
+                i++;
+            }
+            while(i<j && tmp<nums[i]) i++;
+            if(i<j){
+                nums[j]=nums[i];
+                j--;
+            }
+            
+        }
+        if(i == k -1){
+            return tmp;
+        }else if(i< k-1){
+            return quickSort(nums,i+1,right,k);
+        }else{
+            return quickSort(nums,left,i-1,k);
+        }
+    }
+};
