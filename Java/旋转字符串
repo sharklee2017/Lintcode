@@ -1,0 +1,63 @@
+描述：给定一个字符串和一个偏移量，根据偏移量旋转字符串(从左向右旋转)
+思路1:看到字符串操作，恰巧学了stringbuilder，心血来潮，直接写了这个方法，创建一个stringbuilder对象接受字符，通过偏移量计算出哪个字符成为了首字符，
+      然后开始拼接，通过长度判断是否拼接完成，完成后转换为数组，输出即可。方法比较冗余，在网上学习了第二张方法。
+    对于字符串 "abcdefg".
+    offset=0 => "abcdefg"
+    offset=1 => "gabcdef"
+    offset=2 => "fgabcde"
+    offset=3 => "efgabcd"
+    public class Solution {
+    /**
+     * @param str: an array of char
+     * @param offset: an integer
+     * @return: nothing
+     */
+    public void rotateString(char[] str, int offset) {
+        // write your code here
+        int count = 0;
+		int n = str.length;
+		if (n != 0) {
+			int offset1 = offset % n;
+			StringBuilder sb = new StringBuilder();
+			for (int i = n - offset1; i % n < n; i++) {
+				if (count != n) {
+					sb.append(str[i % n]);
+					count++;
+				} else {
+					break;
+				}
+			}
+			char[] s = sb.toString().toCharArray();
+			for (int i = 0; i < s.length; i++) {
+				str[i] = s[i];
+			}
+		}
+}   
+}
+方法2思路：该方法就是一直循环移动，偏移量计算出移动几次，最终获得字符串。主题设计就是大家循环移动一次，即将最后一位移动到第一位，其他依次后移。
+public class Solution {
+    /**
+     * @param str: an array of char
+     * @param offset: an integer
+     * @return: nothing
+     */
+    public void rotateString(char[] str, int offset) {
+        // write your code here
+         char temp;
+		if (offset == 0)
+			return;
+		if (str.length == 0)
+			return;
+		int len = str.length;
+		for (int i = 1; i <= offset % len; i++) {
+			temp = str[len - 1];
+			int j = len - 2;
+			while (j >= 0) {
+				str[j + 1] = str[j];
+				j--;
+			}
+			str[0] = temp;
+		}
+}
+    
+}
