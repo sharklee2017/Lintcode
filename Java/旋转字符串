@@ -43,21 +43,24 @@ public class Solution {
      */
     public void rotateString(char[] str, int offset) {
         // write your code here
-         char temp;
-		if (offset == 0)
-			return;
-		if (str.length == 0)
-			return;
-		int len = str.length;
-		for (int i = 1; i <= offset % len; i++) {
-			temp = str[len - 1];
-			int j = len - 2;
-			while (j >= 0) {
-				str[j + 1] = str[j];
-				j--;
-			}
-			str[0] = temp;
-		}
-}
-    
+        if( str == null || str.length == 0){
+            return;
+        }
+
+        int len = str.length;
+        offset = offset % len;
+
+        reverse(str, 0, len - 1);
+        reverse(str, 0 , offset - 1);
+        reverse(str, offset, len - 1);
+
+    }
+
+    private void reverse(char[] A, int start, int end) {
+            for (int i = start, j = end; i < j; i++, j--) {
+                char temp = A[i];
+                A[i] = A[j];
+                A[j] = temp;
+            }
+        }
 }
