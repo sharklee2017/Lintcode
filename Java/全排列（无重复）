@@ -1,29 +1,20 @@
-package com.huawei.pailie;
-
 import java.util.ArrayList;
 import java.util.List;
-
-public class AllPaiLie {
-
-	/**
-	 * @param args
-	 */
+public class AllPaiLie {	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		int[] nums = { 1, 2, 3 };
 		System.out.println(permute(nums));
-
 	}
-
 	public static List<List<Integer>> permute(int[] nums) {
 		List<List<Integer>> ret = new ArrayList<List<Integer>>();
 		ArrayList<Integer> temp = new ArrayList<Integer>();
-		// 方法1会用到int[] visited = new int[nums.length];
-		// 方法1参数：(层数k,总层数n，ret，temp，数组候选解，访问标志）
-		// recursion(0, nums.length, ret, temp, nums, visited);
-		// 方法2
+		/**方法1：好处在于我能使用这种方法同样可以处理有重复的序列
+		*int[] visited = new int[nums.length];//路径指示，常见操作
+		 *//方法1参数：(层数k,总层数n，ret，temp，数组候选解，访问标志）
+		*recursion(0, nums.length, ret, temp, nums, visited);
+		*/
+		// 方法2，简洁，直接利用contain方法，判断list中有没有
 		subsetshelper(ret, temp, nums);
-
 		return ret;
 
 	}
@@ -31,16 +22,14 @@ public class AllPaiLie {
 	public static void subsetshelper(List<List<Integer>> ret,
 			ArrayList<Integer> temp, int[] nums) {
 		if (temp.size() == nums.length) {
-			// ArrayList<Integer> temp1 = new ArrayList<Integer>(temp);
 			// 错误写法ret.add((temp));，为什么不能直接传递呢，因为此时你直接传递temp，确实会把temp添加进来，
 			// 但是你后续的删除操作也会改变temp的值，因为传递进来的相当于指针，一直对temp操作，ret里面的指向的内容也会改变
 			ret.add(new ArrayList<Integer>(temp));// 这样我相当于每次new了一个对象，开辟了新空间存储temp
 
 		}
-
 		// 把[1]开头的，[2]开头的,[3]开头的，分别加入到result
 		for (int i = 0; i < nums.length; i++) {
-
+		
 			if (temp.contains(nums[i])) {
 				continue;
 			}
