@@ -86,7 +86,8 @@ public class Demo {
 
 }
 
-方法2：输出所有数字出现的次数，并从控制台不定长接收数组
+方法2：输出所有数字出现的次数，并从控制台不定长接收数组。
+	
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
@@ -115,6 +116,9 @@ public class mapdemo {
 		String line = sc.nextLine();
 		String[] strings = line.split(",");
 		int[] chs = new int[strings.length];
+		if(strings[strings.length-1].equals("")){
+		System.out.println("这是一个空数组");
+		}else{
 		for (int i = 0; i < strings.length; i++) {
 			chs[i] = Integer.parseInt(strings[i]);
 		}
@@ -146,6 +150,7 @@ public class mapdemo {
 		// 把字符串缓冲区转换为字符串输出
 		String result = sb.toString();
 		System.out.println("result:" + result);
+		}
 	}
 }
 
