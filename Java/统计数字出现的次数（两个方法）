@@ -20,16 +20,20 @@ public class GetNumberOfK {
 	 * @param k
 	 * @return
 	 */
-	public int GetNumberOfK(int[] array, int k) {
+public class Demo {
+	
+	public static void main(String[] args) {
+	
+
+	}
+
+	public static int GetNumberOfK(int[] array, int k) {
 		int result = 0;
 		if (array == null || array.length == 0) {
 			return 0;
 		}
-
-		int start = 0, end = array.length - 1;
-
-		int firstIndex = getFirstIndex(array, start, end, k);
-		int lastIndex = getLastIndex(array, start, end, k);
+		int firstIndex = firstPosition(array, k);
+		int lastIndex = lastPosition(array, k);
 
 		if (firstIndex > -1 && lastIndex > -1) {
 			result = lastIndex - firstIndex + 1;
@@ -38,54 +42,50 @@ public class GetNumberOfK {
 		return result;
 	}
 
-	private int getLastIndex(int[] array, int start, int end, int k) {
-		if (start > end) {
-			return -1;
-		}
+	public static int lastPosition(int[] nums, int target) {
 
-		int midIndex = (start + end) / 2;
-		int midData = array[midIndex];
-
-		if (midData == k) {
-			if (midIndex < array.length - 1 && array[midIndex + 1] != k
-					|| midIndex == array.length - 1) {
-				return midIndex;
+		int start = 0, end = nums.length - 1;
+		while (start + 1 < end) {
+			int mid = start + (end - start) / 2;
+			if (nums[mid] <= target) {
+				start = mid;
 			} else {
-				start = midIndex + 1;
+				end = mid;
 			}
-		} else if (midData > k) {
-			end = midIndex - 1;
-		} else {
-			start = midIndex + 1;
 		}
 
-		return getLastIndex(array, start, end, k);
+		if (nums[end] == target) {
+			return end;
+		}
+		if (nums[start] == target) {
+			return start;
+		}
+		return -1;
 	}
 
-	private int getFirstIndex(int[] array, int start, int end, int k) {
-		if (start > end) {
-			return -1;
-		}
+	public static int firstPosition(int[] nums, int target) {
 
-		int midIndex = (start + end) / 2;
-		int midData = array[midIndex];
-
-		if (midData == k) {
-			if (midIndex > 0 && array[midIndex - 1] != k || midIndex == 0) {
-				return midIndex;
+		int start = 0, end = nums.length - 1;
+		while (start + 1 < end) {
+			int mid = start + (end - start) / 2;
+			if (nums[mid] >= target) {
+				end = mid;
 			} else {
-				end = midIndex - 1;
+				start = mid;
 			}
-		} else if (midData > k) {
-			end = midIndex - 1;
-		} else {
-			start = midIndex + 1;
 		}
 
-		return getFirstIndex(array, start, end, k);
+		if (nums[start] == target) {
+			return start;
+		}
+		if (nums[end] == target) {
+			return end;
+		}
+		return -1;
 	}
 
 }
+
 方法2：输出所有数字出现的次数，并从控制台不定长接收数组
 import java.util.Scanner;
 import java.util.Set;
