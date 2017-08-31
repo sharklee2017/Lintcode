@@ -1,0 +1,33 @@
+去重排序
+思路：TreeSet接收，输出即可
+
+import java.util.Scanner;
+import java.util.TreeSet;
+
+public class error {
+
+	/**
+	 * 输入  10 
+	 *       20 30 40 50 60 70 80 20 30 40
+	 * 输出   7
+	 *       20 30 40 50 60 70 80 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		TreeSet<Integer> set = new TreeSet<Integer>();
+		while (sc.hasNext()) {
+			int n = sc.nextInt();
+			int[] arr = new int[n];
+			for (int i = 0; i < n; i++) {
+				set.add(sc.nextInt());
+
+			}
+			System.out.println(set.size());
+			for (Integer integer : set) {
+				System.out.print(integer + " ");
+			}
+
+		}
+	}
+}
