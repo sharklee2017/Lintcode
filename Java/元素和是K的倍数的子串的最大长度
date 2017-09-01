@@ -7,7 +7,8 @@
      第二行包含 N 个整数pi ，pi表示序列P第i个元素的值。0 ≤ pi ≤ 105 。
      第三行包含一个整数 K， 1 ≤ K≤ 105 。
 思路：存储的时候，开辟一个和的数组，叠加求和，0的位置为0,1的位置存放第一个元素，2的位置存放第1和第2个元素，3的位置存放第1和第2和第3个元素，以此类推；
-      为什么这么存储呢？有一个数学的原理，A/C的余数和B/C的余数相等，那么（A-B）/C余数为0。那么
+      为什么这么存储呢？这样存储以后，每个位置的下标就表示了有几个数字。
+      本题有一个数学的常识，A/C的余数和B/C的余数相等，那么（A-B）/C余数为0。那么我就找能除K以后余数相等子串的最大小标和最小下标，相减就是我要找的最大长度。
 import java.util.Scanner;
 
 public class zichuan {
@@ -53,7 +54,7 @@ public class zichuan {
 		int k = sc.nextInt();
 		sc.close();
 		System.out.println(new zichuan().getKMaxLength(nums, sums, k));
-	}// main
+	}
 }
 
 // 5
