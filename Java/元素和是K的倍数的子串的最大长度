@@ -1,0 +1,70 @@
+描述：序列中任意个连续的元素组成的子序列称为该序列的子串。
+     现在给你一个序列P和一个整数K，询问元素和是K的倍数的子串的最大长度。
+     比如序列【1,2,3,4,5】，给定的整数K为 5，其中满足条件的子串为{5}、{2,3}、{1,2,3,4}、{1,2,3,4,5}，
+     那么答案就为 5，因为最长的子串为{1,2,3,4,5}；如果满足条件的子串不存在，就输出 0。
+
+输入：第一含一个整数N, 1 ≤ N ≤ 105 。
+     第二行包含 N 个整数pi ，pi表示序列P第i个元素的值。0 ≤ pi ≤ 105 。
+     第三行包含一个整数 K， 1 ≤ K≤ 105 。
+思路：存储的时候，开辟一个和的数组，叠加求和，0的位置为0,1的位置存放第一个元素，2的位置存放第1和第2个元素，3的位置存放第1和第2和第3个元素，以此类推；
+      为什么这么存储呢？有一个数学的原理，A/C的余数和B/C的余数相等，那么（A-B）/C余数为0。那么
+import java.util.Scanner;
+
+public class zichuan {
+	private int getKMaxLength(int[] nums, int[] sums, int k) {
+		int n = nums.length;
+		int[] max = new int[k];
+		int[] min = new int[k];
+		for (int i = 0; i < k; i++) {
+			max[i] = -1;
+			min[i] = n + 1;
+		}
+
+		int mod;
+		for (int i = 0; i < n + 1; i++) {
+			mod = sums[i] % k;
+			// 记录整个数组的同余前缀和的最小下标和最大下标
+			max[mod] = Math.max(max[mod], i);// 相同余数的下标存进来，保留最大下标
+			min[mod] = Math.min(min[mod], i);// 保留最小下标
+			// 如果 a%b = c%b ,则a-c = b*k,k为常数
+		}
+
+		// 然后，同余前缀和的最大下标与最小下标之差，取差的最大值就是最大长度
+		int count = 0;
+		for (int i = 0; i < k; i++) {
+			if (max[i] != -1 && min[i] != n + 1) {// 下标i从0开始，下标最大为n-1
+				count = Math.max(count, max[i] - min[i]);
+			}
+		}
+		return count;
+	}
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int[] nums = new int[n];
+		int[] sums = new int[n + 1];
+		sums[0] = 0;
+		for (int i = 0; i < n; i++) {
+			nums[i] = sc.nextInt();
+			sums[i + 1] = sums[i] + nums[i];
+		}// for
+
+		int k = sc.nextInt();
+		sc.close();
+		System.out.println(new zichuan().getKMaxLength(nums, sums, k));
+	}// main
+}
+
+// 5
+// 1 2 3 4 5
+// 5
+// 输出
+// 5
+
+// 6
+// 4 1 3 7 7 7
+// 4
+// 输出
+// 4
+
