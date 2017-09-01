@@ -1,0 +1,36 @@
+描述：老师将所有人分成N组，老师开始收第一组的卷子放好，然后收第二组的卷子，这时候从放好的卷子里给第二组去批改，然后将第二组放在原有卷子下面，继续收第三组，
+      依次操作，需要解决的问题：1.自己不能改到自己的卷子。2，从放好的卷子拿给下一组发，确保数量是足够的。
+case：输入 2        
+          10 20
+      输出 No
+      输入 4
+          3 2 1 3
+      输出 Yes
+思路：刚开始由于题目描述比较冗余，没啥太好的思想，想的是用dfs（深度优先搜索），选择一个开始往下找，如果不行就返回，换一条路径。后来又读了题目，发现每次从
+      人数最多的组开始，不会出现第2个问题，那么第一个问题怎么解决？进一步思考，将数组排序，最大的一组，如果发完一圈回来还有第一组，就会出现第一个问题，所
+      此时应保证最大的一组应该比后面剩余组的人数和要小才可以（包括等于），此处还有额外加一个判断，如果最大组不止一个，那么从最后一个最大开始计数。
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class gaijuanzi {
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+		while (sc.hasNext()) {
+			int n = sc.nextInt();
+			int[] s = new int[n];
+			int sum = 0;
+			for (int i = 0; i < n; i++) {
+				s[i] = sc.nextInt();
+				sum += s[i];
+			}
+			Arrays.sort(s);
+			if (sum >= 2 * s[n - 1]) {
+				System.out.println("Yes");
+			} else {
+				System.out.println("No");
+			}
+		}
+	}
+}
