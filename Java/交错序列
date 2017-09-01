@@ -1,0 +1,30 @@
+描述：我们定义一个由数字0和1组成的序列是交错序列，当且仅当这个序列中的0和1是轮流出现的，比如0,010,10101,都是交错序列。
+      现在给出一个01序列，它可能不是一个交错序列，但你可以从序列中选择一些数字出来，按他们在序列中原有的相对顺序排列，最终得到交错序列，问交错序列的最长
+      长度是多少？
+思路：就从第一个开始遍历，遇到不同的就+1，遇到相同的就跳过，遍历一遍就可求解。
+
+import java.util.Scanner;
+public class jiaocuoxulie {
+
+	public static void main(String[] args) {
+  
+	  	Scanner scanner = new Scanner(System.in);
+		  int n = scanner.nextInt();
+		  int[] a = new int[n];
+    
+		  scanner.nextLine();
+    
+	  	for (int i = 0; i < a.length; i++) {
+			  a[i] = scanner.nextInt();
+		     }
+	  	int temp = a[0];
+	  	int count = 1;
+		  for (int i = 1; i < a.length; i++) {
+			if (a[i] == temp)
+				continue;
+		  	temp = a[i];
+			  count++;
+		  }
+	  	System.out.println(count);
+	  }
+}
