@@ -1,27 +1,31 @@
-public class Main{
-   public static void main(String[] args){
-       int num=?;
-       System.out.printlb(perfectSqrt（num）);
-   
-   }
-   public static int perfectSqrt(int n)｛
-      int s=sqrt（）；
-      if（s*s==n）{
-        return 1;
-      }
-      int[] dp=new int [n+1];
-      Arrays.fill(dp,Integer.MAX_VALUE);
-      dp[0]=0;
-      for(int i=1;i<=n;i++){
-        int j=1;
-        while(i-j*j>0){
-          dp[i]=Math.min(dp[i],dp[i-j*j]+1);
-          j++;
-        }
-      }
-      return dp[n];
+package com.lpy.Demo;
+
+import java.util.Arrays;
+
+
+public class Demo3 {
+    public static void main(String args[]) {
+        int num = 12;
+        System.out.println(perfectSqrt(num));
+
     }
-      
-      
-   }
+
+    public static int perfectSqrt(int n) {
+        int s = (int) Math.sqrt(n);
+        if (s * s == n) {
+            return 1;
+        }
+        int[] dp = new int[n + 1];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0;
+
+        for (int i = 0; i <= n; i++) {
+            for (int j = 1; j * j + i <= n; j++)
+                dp[i + j * j] = Math.min(dp[i] + 1, dp[i + j * j]);
+
+        }
+        return dp[n];
+    }
 }
+
+
