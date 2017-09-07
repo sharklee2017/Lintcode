@@ -1,0 +1,42 @@
+ 对于一个给定的正整数，可能存在多种平方和的表示法。
+  要求你对4个数排序：
+  0 <= a <= b <= c <= d
+并对所有的可能表示法按 a,b,c,d 为联合主键升序排列，最后输出第一个表示法
+程序输入为一个正整数N (N<5000000)
+要求输出4个非负整数，按从小到大排序，中间用空格分开
+例如，输入：
+5
+则程序应该输出：
+0 0 1 2
+再例如，输入：
+12
+则程序应该输出：
+0 2 2 2
+再例如，输入：
+773535
+则程序应该输出：
+1 1 267 838
+思路：因为题目要求4个数从小到大并且取最小的一项输出，所以用四个for循环来表示四个数，并且内层的循环变量起始值=外层变量，来确保有顺序，这样写还有一个
+好处，当选取出第一个项时，这个结果就是最小的结果项，此时就可以return了。
+import java.util.Scanner;
+
+public class PerfectSquare2 {
+	public static void main(String[] args) {
+		int s = (new Scanner(System.in)).nextInt();
+		int a, b, c, d;
+		for (a = 0; a <= Math.sqrt(s); a++) {
+			for (b = a; b <= Math.sqrt(s); b++) {
+				for (c = b; c <= Math.sqrt(s); c++) {
+					for (d = c; d <= Math.sqrt(s); d++) {
+						if (s == (Math.pow(a, 2) + Math.pow(b, 2)
+								+ Math.pow(c, 2) + Math.pow(d, 2))) {
+							System.out.println(a + " " + b + " " + c + " " + d);
+							return;
+						}
+					}
+				}
+			}
+		}
+	}
+
+}
