@@ -1,0 +1,30 @@
+问题描述：给出一个字符串，找到该字符串中最长的数字子串，然后输出数字子串及长度，如果数字子串长度相等，则均输出，并返回最长子串长度。如果没有，返回空字符串；
+split("\\D+")以非数字字符分割字符串，获得只包含数字字符串的字符串数组。后续判断长度即可
+import java.util.Scanner;
+public class zuichangshuzichuan {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		while (true) {
+			String s = sc.nextLine();
+			if (s.length() != 0) {
+				String[] strings = s.split("\\D+");
+				int len = strings[0].length();
+				StringBuilder sBuilder = new StringBuilder();
+				sBuilder.append(strings[0]);
+				for (int i = 1; i < strings.length; i++) {
+					if (strings[i].length() > len) {
+						sBuilder.setLength(0);
+						len = strings[i].length();
+						sBuilder.append(strings[i]);
+					} else if (strings[i].length() == len) {
+						sBuilder.append(strings[i]);
+					}
+				}
+				System.out.println(sBuilder.toString() + "," + len);
+			} else {
+				System.out.println("");
+			}
+		}
+	}
+}
