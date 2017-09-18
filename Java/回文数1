@@ -1,0 +1,36 @@
+输入字符串，判断字符串能不能在插入一个字符的情况下，实现回文字符串。如果不能，返回-1；
+思路：判断方法，可以作为回文数的模板。
+public static boolean huiwen(String str){
+char[] s = str.toCharArray();
+int len = s.length;
+int i = 0, j = len - 1;
+int countdif = 0;//统计不同的次数
+
+while (i < j) {
+    if (s[i] == s[j])      //首尾相向比较
+    {
+        i++;
+        j--;
+    } else {
+     //判断是否为缺失位,关键的一步，如果出现对应位置不同，则判断i+1与j对应的或者i与j-1对应的是否相同，如果都不满足，那就说明插入一个不可以完成
+        if (s[i + 1] == s[j] || s[i] == s[j - 1]) 
+        {
+            if (s[i + 1] == s[j]) {
+                i++;
+            } else {
+                j--;
+            }
+            countdif++;
+        } else {
+            countdif = 2;
+            break;
+        }
+
+    }
+}
+if (countdif == 1 || countdif == 0) return true;
+else if (countdif == 2) {
+    return false;
+}
+return false;
+}
