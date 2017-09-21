@@ -15,7 +15,7 @@ public class Solution {
 			if (result > Integer.MAX_VALUE) {
 				return 0;
 			}
-			tmp /= 10;
+			temp /= 10;
 		}
 		return (int) (x >= 0 ? result : -result);
     }
