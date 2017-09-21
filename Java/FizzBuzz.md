@@ -38,17 +38,4 @@ public class Solution {
         }
 };
 ```
-
-### Example
-
-Here's a (boring) `HelloWorld` class:
-
-```java
-package com.example.helloworld;
-
-public final class HelloWorld {
-  public static void main(String[] args) {
-    System.out.println("Hello, JavaPoet!");
-  }
-}
 ```
