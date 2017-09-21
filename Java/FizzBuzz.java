@@ -1,4 +1,4 @@
- 描述：给你一个整数n. 从 1 到 n 按照下面的规则打印每个数：<br>
+ *描述：给你一个整数n. 从 1 到 n 按照下面的规则打印每个数：<br>
     如果这个数被3整除，打印fizz.<br>
     如果这个数被5整除，打印buzz.<br>
     如果这个数能同时被3和5整除，打印fizz buzz.<br>
@@ -14,7 +14,6 @@
 思路：该题返回类型为ArrayList，创建ArrayList对象，进行添加操作即可。fizzbuzz的判断比较清晰。注意：ay.add(i + "");这句话很关键，前面添加的都是<br>
 String类型，此处应该也是String，int转换String方法，1.) String s = String.valueOf(i);2.) String s = Integer.toString(i);3.) String s = "" + i;<br>
 
- ```java
 public class Solution {
     /*
      * @param : An integer
@@ -37,4 +36,4 @@ public class Solution {
 		return ay;
         }
 };
-```
+
