@@ -11,7 +11,8 @@
   "buzz", "11", "fizz",<br>
   "13", "14", "fizz buzz"<br>
 ]<br>
-思路：该题返回类型为ArrayList，创建ArrayList对象，进行添加操作即可。fizzbuzz的判断比较清晰。注意：ay.add(i + "");这句话很关键，前面添加的都是<br>String
+
+*思路：该题返回类型为ArrayList，创建ArrayList对象，进行添加操作即可。fizzbuzz的判断比较清晰。注意：ay.add(i + "");这句话很关键，前面添加的都是<br>String
 类型，此处应该也是String，int转换String方法，1.) String s = String.valueOf(i);2.) String s = Integer.toString(i);3.) String s = "" + i;<br>
 
  ```java
