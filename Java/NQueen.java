@@ -23,7 +23,8 @@ public class NQueen {
     }
 
     public static void putQueen(short[] chess, short row) {
-        short[] chessTemp = chess.clone();
+        short[] chessTemp = chess.clone();\\克隆棋牌
+        \\如果行到达最后一行，就输出并计数
         if (row == N) {
             for (short i : chessTemp) {
                 System.out.print(i + "\t");
@@ -36,7 +37,7 @@ public class NQueen {
         for (int i = 0; i < N; i++) {
             chessTemp[row] = (short) i;
             if (isSafety(chessTemp, row, (short) i)) {
-
+            \\dfs遍历，一层层向下判断
                 putQueen(chessTemp, (short) (row + 1));
             }
         }
