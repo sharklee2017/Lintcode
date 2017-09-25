@@ -25,7 +25,7 @@ public class ziji {
 		return result;
 	}
 
-	static void dfs(List<List<Integer>> result, List<Integer> list, int[] nums,
+	public static void dfs(List<List<Integer>> result, List<Integer> list, int[] nums,
 			int pos) {
 		result.add(new ArrayList<Integer>(list));
 
