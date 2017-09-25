@@ -1,4 +1,3 @@
-package com.huawei.ziji;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,7 +6,7 @@ import java.util.List;
 /**
  * 输出一个数组的所有子集
  */
-public class ziji {
+public class subset {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int[] nums = { 1, 2, 2 };
